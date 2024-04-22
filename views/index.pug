@@ -1,0 +1,78 @@
+doctype html
+html
+    head
+        title= title
+        link(rel='stylesheet', href='/style/style.css')
+        link(rel='icon', href='/images/favicon.png', type='image/x-icon')
+    body
+        h1.marginLeft Liomer
+            span.subText  le site officiel
+        div.center
+            img.pic.largeWidth(src="/images/home.png")
+        h2.nextPart.largeMarginLeft À l'affiche
+        div#affichesContainer
+            div#affichesWrapper
+                div.flex-column
+                    a(href="#")
+                        img.pic.affiche(src="/affiches/affiche1.png")
+                    a.lilMarginTop.subText 5 mai 2024
+                a(href="#")
+                    img.pic.affiche(src="/affiches/affiche2.jpeg")
+                a(href="#")
+                    img.pic.affiche(src="/affiches/affiche3.jpeg")
+                a(href="#")
+                    img.pic.affiche(src="/affiches/affiche4.jpeg")
+                a(href="#")
+                    img.pic.affiche(src="/affiches/affiche5.jpeg")
+                a(href="#")
+                    img.pic.affiche(src="/affiches/affiche6.jpeg")
+                each affiche in affiches
+                    div.flex-column
+                        a(href='#')
+                            img.pic.affiche(src=`/affiches/${affiche.picpath}`, alt='Affiche')
+                        a.lilMarginTop.subText #{affiche.date_fin}
+
+
+        div.center
+            a.whiteButton(href="/ajoutAffiche") Ajouter une affiche
+        h2.nextPart.largeMarginLeft Informations
+        div.center.tel
+            div.block.centerV.marginLeft
+                div.marginLeft.marginTop
+                    p.green.lilMarginBottom horaires de la mairie
+                    br
+                    div.lilMarginBottom
+                        p.noMargin Lundi
+                        p.subText.noMargin 09h00 - 12h00 et 13h30 - 17h30
+                    div.lilMarginBottom
+                        p.noMargin Mardi
+                        p.subText.noMargin 09h00 - 12h00
+                    div.lilMarginBottom
+                        p.noMargin Mercredi
+                        p.subText.noMargin 09h45 - 12h00
+                    div
+                        p.noMargin vendredi
+                        p.subText.noMargin 14h30 - 16h30
+            div.block.centerV
+                div.marginLeft.marginTop
+                    p.red Coordonnées
+                    br
+                    div.lilMarginBottom
+                        p.noMargin Adresse
+                        p.subText.noMargin Pl. du 17 Août, 80430 Liomer
+                    div.lilMarginBottom
+                        p.noMargin Téléphone
+                        p.subText.noMargin à remplir
+                    div.lilMarginBottom
+                        p.noMargin E-mail
+                        p.subText.noMargin à remplir
+                div.center
+                    a.redButton(href="/contacter") nous contacter
+            div.block.centerV
+                div.marginLeft.marginTop
+                    p.blue Évènement à venir
+                    br
+                    div.lilMarginBottom.marginTop
+                        p.subText.noMargin Aucun évènement à venir
+        include partials/footer
+        div.marginBottom

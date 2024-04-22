@@ -1,0 +1,19 @@
+div.center.nextPart
+    div.center.flex-column.footer
+        h3.noMargin Restez au courant
+        p.subText.noMargin Recevez les mails d'actualités
+        form.lilMarginTop(action='/newsletter', method='post')
+            input.input(type='email', id='mail', name='mail', placeholder='votre e-mail' pattern='[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$' required)
+            button.submit(type='submit') Envoyer
+        div.tinyWidth.lilMarginTop
+            p informations utiles
+        div.center
+            div.flex-column.sideMargin
+                a.subText(href="https://fr.wikipedia.org/wiki/Liomer") Wikipedia
+                a.subText.lilMarginTop(href="https://www.courrier-picard.fr/7645/locations/liomer-somme") Courrier Picard
+            div.flex-column.sideMargin
+                a.subText(href="https://www.google.com/maps/place/80430+Liomer/@49.8599672,1.7878246,14z/data=!3m1!4b1!4m6!3m5!1s0x47e767f4c090dd55:0x40af13e81620560!8m2!3d49.857148!4d1.817834!16s%2Fm%2F03qmj4m?entry=ttu") M'y rendre
+                a.subText.lilMarginTop(href="https://www.francebleu.fr/hauts-de-france/somme-80/liomer-80484") France bleu
+            div.flex-column.sideMargin
+                a.subText(href="https://lannuaire.service-public.fr/hauts-de-france/somme/739dcbd3-0c66-4f88-8301-d9497c363d50") Service public
+                a.subText.lilMarginTop Github

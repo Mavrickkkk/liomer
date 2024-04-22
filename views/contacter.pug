@@ -1,0 +1,30 @@
+doctype html
+html
+    head
+        title= title
+        link(rel='stylesheet', href='/style/style.css')
+        link(rel='stylesheet', href='/style/styleFormulaire.css')
+        link(rel='icon', href='/images/favicon.png', type='image/x-icon')
+    body
+        h1.marginLeft Liomer
+            span.subText  le site officiel
+        a.bigMarginLeft.marginBottom.blackButton(href="/") Menu
+        div.center
+            div.formulaire
+                h1 Nous contacter
+                p.subText * Toutes les données ci-dessous sont requises
+                form.form(action='/contact', method='post')
+                    p prénom
+                    input.input(type='text', id='prenom', name='prenom', required)
+                    p nom
+                    input.input(type='text', id='nom', name='nom', required)
+                    p e-mail
+                    input.input(type='email', id='mail', name='mail', pattern='[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$' required)
+                    p sujet
+                    input.input(type='text', id='sujet', name='sujet', required)
+                    p message
+                    textarea.input.textArea(id='message', name='message', required)
+                    div.center
+                        button.submitForm(type='submit') Envoyer
+        include partials/footer
+        div.marginBottom

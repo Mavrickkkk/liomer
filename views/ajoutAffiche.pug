@@ -1,0 +1,41 @@
+doctype html
+html
+    head
+        title= title
+        link(rel='stylesheet', href='/style/style.css')
+        link(rel='stylesheet', href='/style/styleFormulaire.css')
+        link(rel='icon', href='/images/favicon.png', type='image/x-icon')
+
+    body
+        h1.marginLeft Liomer
+            span.subText  le site officiel
+        a.bigMarginLeft.marginBottom.blackButton(href="/") Menu
+        div.center
+            div.formulaire
+                h1 Ajouter une affiche
+                p.subText * Toutes les données ci-dessous sont requises
+                form.form(action='/envoyerAffiche', method='post', enctype='multipart/form-data')
+                    p titre
+                    input.input(type='text', id='titre', name='titre', required)
+                    p description
+                    textarea.input.textArea(id='description', name='description', required)
+                    p image
+                    p.subText * uniquement png jpg ou jpeg
+                    .custom-file-upload
+                        input#fileInput(type='file', name='file', accept='image/png, image/jpeg, image/jpg', required)
+                        label(for='fileInput') +
+                    p date de fin
+                    input.input(type='date', id='date', name='date', required)
+
+                    div.center
+                        button.submitForm(type='submit') Envoyer
+        include partials/footer
+        div.marginBottom
+        script.
+            const fileInput = document.querySelector('#fileInput');
+            const label = document.querySelector('.custom-file-upload label');
+
+            fileInput.addEventListener('change', () => {
+                const fileName = fileInput.files[0].name;
+                label.textContent = fileName;
+            });
