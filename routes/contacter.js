@@ -1,6 +1,7 @@
 const express = require('express');
-const router = express.Router();
 const connection = require('../database');
+const router = express.Router();
+
 
 // Fonction pour valider l'adresse e-mail
 function isValidEmail(email) {

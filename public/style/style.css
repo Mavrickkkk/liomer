@@ -42,6 +42,8 @@ p {
 }
 
 a {
+  font-size: 130%;
+  color: black;
   text-decoration: none;
 }
 
@@ -67,6 +69,10 @@ a {
 
 .marginTop {
   margin-top: 50px;
+}
+
+.bigMarginLeft {
+  margin-left: 60px;
 }
 
 .lilMarginTop{
@@ -105,6 +111,19 @@ a {
   align-items: center;
 }
 
+.flex-column {
+  display: flex;
+  flex-direction: column;
+}
+
+.align-items-center {
+  align-items: center;
+}
+
+.text-center {
+  text-align: center;
+}
+
 .pic {
   border-radius: 30px;
   box-shadow: 0px 0px 3px rgba(0, 0, 0, 0.2);
@@ -112,6 +131,10 @@ a {
 
 .largeWidth {
   width: 90vw;
+}
+
+.midWidth {
+  width: 60vw;
 }
 
 .tinyWidth {
@@ -122,9 +145,19 @@ a {
   display: block;
 }
 
+.backWhite {
+  background-color: white;
+  width: 100vw;
+  padding: 60px 0;
+  border-radius: 50px;
+}
+
 .redButton {
   color: white;
   background-color: #EC4857;
+  font-family: mysemibold, sans-serif;
+  border: none;
+  cursor: pointer;
   padding: 10px 30px;
   border-radius: 20px;
   text-decoration: none;
@@ -133,6 +166,21 @@ a {
 
 .redButton:hover {
   background-color: #c73c49;
+  transform: scale(1.03);
+  transition: transform 0.3s ease;
+}
+
+.blueButton {
+  color: white;
+  background-color: #1D97FF;
+  padding: 10px 30px;
+  border-radius: 20px;
+  text-decoration: none;
+  transition: transform 0.3s ease;
+}
+
+.blueButton:hover {
+  background-color: #177ed5;
   transform: scale(1.03);
   transition: transform 0.3s ease;
 }
@@ -165,8 +213,8 @@ a {
 }
 
 .affiche {
-  border-radius: 15px;
-  height: 450px;
+  border-radius: 30px;
+  height: 600px;
   width: auto;
   margin: 0px 10px;
   transition: transform 0.3s ease;
@@ -177,25 +225,56 @@ a {
   transition: transform 0.3s ease;
 }
 
+#affichesWrapper {
+  position: relative;
+  display: flex;
+  width: max-content;
+  padding: 30px 50px;
+  left: 0px;
+}
+
+#affichesContainer::-webkit-scrollbar {
+  display: none;
+}
+
+.affiches-section {
+  position: relative;
+  width: 100%;
+}
 
 #affichesContainer {
-  position: relative;
   width: 100%;
   overflow-x: auto;
   overflow-y: hidden;
   height: auto;
 }
 
-#affichesWrapper {
-  position: relative;
+#scrollButtonsContainer {
+  position: absolute;
+  bottom: -40px;
+  right: 30px;
   display: flex;
-  width: max-content;
-  padding: 30px 50px;
+  z-index: 1;
 }
 
-#affichesContainer::-webkit-scrollbar {
-  display: none;
+#scrollLeft, #scrollRight {
+  background: #F5F5F7;
+  width: 45px;
+  border: none;
+  border-radius: 50px;
+  font-size: 2rem;
+  cursor: pointer;
+  opacity: 0.5;
+  transition: opacity 0.5s ease;
+  margin-right: 15px;
 }
+
+#scrollLeft:hover, #scrollRight:hover {
+  opacity: 1;
+  transform: scale(1.03);
+  transition: transform 0.3s ease;
+}
+
 
 .block{
   height: 400px;
@@ -207,7 +286,16 @@ a {
   display: block;
 }
 
-@media (max-width: 750px) {
+.animate-on-scroll {
+  opacity: 0;
+  transition: opacity 1s ease-in-out;
+}
+
+.animate-on-scroll.active {
+  opacity: 1;
+}
+
+@media (max-width: 1080px) {
   .tel {
     display: block;
   }
@@ -221,16 +309,17 @@ a {
     display: block;
     padding: 30px;
   }
+
   .largeMarginLeft {
     margin-left: 20px;
   }
 }
 
 .footer {
-  width: 90vw;
+  width: 100vw;
   background-color: white;
   padding: 30px 50px;
-  border-radius: 30px;
+  border-radius: 30px 30px 0 0px;
   box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.1);
 }
 
@@ -275,4 +364,12 @@ a {
 
 form {
   width: 500px;
+}
+
+.imagePresentation {
+  border-radius: 30px;
+  height: auto;
+  width: 50vw;
+  margin: 0px 30px;
+  transition: transform 0.3s ease;
 }

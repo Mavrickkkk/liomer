@@ -9,9 +9,9 @@ function isValidEmail(email) {
 }
 
 router.get('/', function (req, res, next) {
-    connection.query('SELECT * FROM actu', (err, rows) => {
+    connection.query('SELECT * FROM actu ORDER BY date_fin ASC', (err, rows) => {
         if (err) {
-            console.error('Erreur lors de la récupération des dessins :', err);
+            console.error('Erreur lors de la récupération des affiches :', err);
             res.status(500).send('Erreur serveur');
             return;
         }
@@ -29,10 +29,6 @@ router.get('/', function (req, res, next) {
         res.render('index', {title: 'Liomer - Accueil', affiches});
     });
 });
-
-
-
-
 
 router.post('/newsletter', (req, res) => {
     const email = req.body.mail;

@@ -3,37 +3,80 @@ html
     head
         title= title
         link(rel='stylesheet', href='/style/style.css')
+        link(rel='stylesheet', href='/style/styleMenu.css')
+        link(rel='stylesheet', href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css', integrity='sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==', crossorigin='anonymous')
         link(rel='icon', href='/images/favicon.png', type='image/x-icon')
+        script(src="/javascripts/menu.js")
     body
-        h1.marginLeft Liomer
-            span.subText  le site officiel
-        div.center
-            img.pic.largeWidth(src="/images/home.png")
-        h2.nextPart.largeMarginLeft À l'affiche
-        div#affichesContainer
-            div#affichesWrapper
-                div.flex-column
-                    a(href="#")
-                        img.pic.affiche(src="/affiches/affiche1.png")
-                    a.lilMarginTop.subText 5 mai 2024
-                a(href="#")
-                    img.pic.affiche(src="/affiches/affiche2.jpeg")
-                a(href="#")
-                    img.pic.affiche(src="/affiches/affiche3.jpeg")
-                a(href="#")
-                    img.pic.affiche(src="/affiches/affiche4.jpeg")
-                a(href="#")
-                    img.pic.affiche(src="/affiches/affiche5.jpeg")
-                a(href="#")
-                    img.pic.affiche(src="/affiches/affiche6.jpeg")
-                each affiche in affiches
-                    div.flex-column
-                        a(href='#')
-                            img.pic.affiche(src=`/affiches/${affiche.picpath}`, alt='Affiche')
-                        a.lilMarginTop.subText #{affiche.date_fin}
+        include partials/header.pug
+        div.backWhite
+            div.center.animate-on-scroll
+                img.pic.largeWidth(src="/images/home.png")
+            h2.nextPart.largeMarginLeft L'agenda
 
+            div.affiches-section
+                div#affichesContainer
+                    div#affichesWrapper
+                        each affiche in affiches
+                            div.flex-column(data-index=`${affiche.id}`)
+                                a(href=`/affiche/${affiche.id}`)
+                                    img.pic.affiche(src=`/affiches/${affiche.picpath}`, alt='Affiche')
+                                a.lilMarginTop.subText #{affiche.date_fin}
+                div#scrollButtonsContainer.marginTop
+                    button#scrollLeft
+                        i.fas.fa-angle-left
+                    button#scrollRight
+                        i.fas.fa-angle-right
 
-        div.center
+            script.
+                const affichesContainer = document.getElementById('affichesContainer');
+                const affiches = document.querySelectorAll('.flex-column');
+                const scrollLeft = document.getElementById('scrollLeft');
+                const scrollRight = document.getElementById('scrollRight');
+
+                let currentIndex = 0;
+
+                scrollLeft.addEventListener('click', function () {
+                    currentIndex = Math.max(0, currentIndex - 1);
+                    smoothScrollToIndex(currentIndex);
+                });
+
+                scrollRight.addEventListener('click', function () {
+                    currentIndex = Math.min(affiches.length - 1, currentIndex + 1);
+                    smoothScrollToIndex(currentIndex);
+                });
+
+                function smoothScrollTo(element, targetPosition, duration = 1000, easing = 'cubic-bezier(0.42, 0, 0.58, 1)') {
+                    const startPosition = element.scrollLeft;
+                    const distance = targetPosition - startPosition;
+                    let startTime = null;
+
+                    function animation(currentTime) {
+                        if (startTime === null) startTime = currentTime;
+                        const timeElapsed = currentTime - startTime;
+                        let progress = timeElapsed / duration;
+
+                        if (progress > 1) progress = 1;
+
+                        const easingFunction = (t) => --t * t * t + 1;
+
+                        const easedProgress = easingFunction(progress);
+                        element.scrollLeft = startPosition + distance * easedProgress;
+
+                        if (progress < 1) requestAnimationFrame(animation);
+                    }
+
+                    requestAnimationFrame(animation);
+                }
+
+                function smoothScrollToIndex(index) {
+                    const targetElement = affiches[index];
+                    const targetPosition = targetElement.offsetLeft;
+
+                    smoothScrollTo(affichesContainer, targetPosition); // Appeler la fonction smoothScrollTo() au lieu de affichesContainer.scrollTo()
+                }
+
+        div.center.marginTop
             a.whiteButton(href="/ajoutAffiche") Ajouter une affiche
         h2.nextPart.largeMarginLeft Informations
         div.center.tel
@@ -68,6 +111,7 @@ html
                         p.subText.noMargin à remplir
                 div.center
                     a.redButton(href="/contacter") nous contacter
+                    p.
             div.block.centerV
                 div.marginLeft.marginTop
                     p.blue Évènement à venir
@@ -75,4 +119,3 @@ html
                     div.lilMarginBottom.marginTop
                         p.subText.noMargin Aucun évènement à venir
         include partials/footer
-        div.marginBottom

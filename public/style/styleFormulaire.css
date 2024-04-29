@@ -41,10 +41,6 @@
     padding: 15px;
 }
 
-.bigMarginLeft {
-    margin-left: 60px;
-}
-
 .custom-file-upload {
     position: relative;
     overflow: hidden;

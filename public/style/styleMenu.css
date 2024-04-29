@@ -1,0 +1,66 @@
+#menuToggle {
+    display: block;
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    z-index: 101;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+#menuToggle input {
+    display: none;
+}
+
+#menuToggle span {
+    display: block;
+    width: 35px;
+    height: 5px;
+    margin-bottom: 5px;
+    position: relative;
+    background: black;
+    border-radius: 10px;
+    z-index: 110;
+
+}
+
+#menuToggle:hover {
+    transform: scale(1.1);
+    transition: transform 0.3s ease;
+}
+
+
+#menu {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 300px;
+    height: 100%;
+    background-color: white;
+    border-radius: 0 30px 30px 0;
+    box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.1);
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 20px;
+    z-index: 100;
+}
+
+#menu.show {
+    opacity: 1;
+}
+
+#menuToggle input:checked ~ #menu {
+    opacity: 1;
+}
+
+#menu a {
+    display: block;
+    margin-top: 30px;
+    font-size: 200%;
+    color: black;
+    text-decoration: none;
+}

@@ -1,0 +1,37 @@
+doctype html
+html
+    head
+        title= title
+        link(rel='stylesheet', href='/style/style.css')
+        link(rel='stylesheet', href='/style/styleMenu.css')
+        link(rel='stylesheet', href='/style/styleInfo.css')
+        link(rel='icon', href='/images/favicon.png', type='image/x-icon')
+        script(src="/javascripts/menu.js")
+    body
+        include partials/header.pug
+
+        div.center
+            div.blockInfoLarge
+                h2 Informations utiles
+                p SPA
+                p.subText Oisemont Protection Animale: 24 Rue Jean Jaurès, 80140 Oisemont – 03 22 25 12 37
+        div.center
+            div.blockInfoLarge
+                h2 Déchetterie
+                p.subText La commune de Liomer est rattaché à la déchetterie de Trinoval située à Thieulloy-L’abbaye.
+                    a.subText.marginLeft.blueButton(href="https://www.trinoval.fr/Prestations-et-services/Particuliers/Dechetteries") Plus d'informations
+        div.center
+            div.blockInfoLarge
+                p Numéro à contacter en cas d'urgence
+                p Samu
+                    span.subText.marginLeft 15
+                p Pompier
+                    span.subText.marginLeft 18
+                p Urgences
+                    span.subText.marginLeft 112
+                p Police
+                    span.subText.marginLeft 17
+        div.center
+            div.blockInfoLarge
+                p Projet d'aménagement urbain
+        include partials/footer

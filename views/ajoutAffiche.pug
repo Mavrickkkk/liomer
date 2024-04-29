@@ -3,13 +3,12 @@ html
     head
         title= title
         link(rel='stylesheet', href='/style/style.css')
+        link(rel='stylesheet', href='/style/styleMenu.css')
         link(rel='stylesheet', href='/style/styleFormulaire.css')
         link(rel='icon', href='/images/favicon.png', type='image/x-icon')
-
+        script(src="/javascripts/menu.js")
     body
-        h1.marginLeft Liomer
-            span.subText  le site officiel
-        a.bigMarginLeft.marginBottom.blackButton(href="/") Menu
+        include partials/header.pug
         div.center
             div.formulaire
                 h1 Ajouter une affiche
@@ -24,7 +23,7 @@ html
                     .custom-file-upload
                         input#fileInput(type='file', name='file', accept='image/png, image/jpeg, image/jpg', required)
                         label(for='fileInput') +
-                    p date de fin
+                    p date de l'événement (ou fin)
                     input.input(type='date', id='date', name='date', required)
 
                     div.center

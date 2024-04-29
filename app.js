@@ -28,12 +28,24 @@ app.use(express.urlencoded({ extended: true }));
 const index = require('./routes/index.js');
 const contacter = require('./routes/contacter.js')
 const ajoutAffiche = require('./routes/ajoutAffiche.js')
+const affiche = require('./routes/affiche.js')
+const poste = require('./routes/poste.js')
+const mairie = require('./routes/mairie.js')
+const info_utiles = require('./routes/info_utiles.js')
+const associations = require('./routes/associations.js')
+const connexion = require('./routes/connexion.js')
 
 app.use(index);
 app.use(contacter);
 app.use(ajoutAffiche);
+app.use(affiche);
+app.use(poste);
+app.use(mairie);
+app.use(info_utiles);
+app.use(associations);
+app.use(connexion);
 
-const port = process.env.PORT || 3000;
+const port = 3000;
 server.listen(port, () => {
   console.log(`Server listening at http://localhost:${port}`);
 });

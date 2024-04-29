@@ -1,0 +1,65 @@
+doctype html
+html
+    head
+        title= title
+        link(rel='stylesheet', href='/style/style.css')
+        link(rel='stylesheet', href='/style/styleMenu.css')
+        link(rel='stylesheet', href='/style/styleFormulaire.css')
+        link(rel='stylesheet', href='/style/styleInfo.css')
+        link(rel='icon', href='/images/favicon.png', type='image/x-icon')
+        script(src="/javascripts/menu.js")
+    body
+        include partials/header.pug
+        div.center
+            div.fullBlueTop
+        div.center
+            div.blockInfoLarge
+                h2 Comité des fêtes
+                p.marginLeft Comité des fêtes de Liomer
+                    span.subText.marginLeft Dominique Manier 06 45 87 63 43
+        div.center
+            div.blockInfoLarge
+                h2 Associations
+                h3 titre
+                p.subText description de l'association
+                p Président(e)
+                    span.subText.marginLeft description
+                p Adresse
+                    span.subText.marginLeft description
+                p Coordonnées
+                    span.subText.marginLeft description
+                div.marginBottom
+                each association in associations
+                    h3= association.nom
+                    p.subText= association.description
+                    p Président(e)
+                        span.subText.marginLeft= association.president
+                    p Adresse
+                        span.subText.marginLeft= association.adresse
+                    p Coordonnées
+                        span.subText.marginLeft= association.coordonnees
+                    div.marginBottom
+
+        div.center
+            a.blueButton ajouter une association
+        div.center
+            div.formulaire
+                h1 Ajout d'une association
+                p.subText * Toutes les données ci dessous sont requises
+                form.form(action='/associations', method='post')
+                    p nom de l'association
+                    input.input(type='text', id='nom', name='nom', required)
+                    p description
+                    textarea.input.textArea(id='description', name='description', required)
+                    p président
+                    input.input(type='text', id='president', name='president', required)
+                    p adresse
+                    input.input(type='text', id='adresse', name='adresse', required)
+                    p coordonnée
+                        span.subText  (numéro de téléphone ou adresse mail)
+                    input.input(type='text', id='coordonnee', name='coordonnee', required)
+                    div.center
+                        button.submitForm(type='submit') Envoyer
+                    div.center
+                        p.subText * Votre demande sera étudiée avant d'être publiée
+        include partials/footer
