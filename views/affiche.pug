@@ -1,21 +1,13 @@
 doctype html
 html
-    head
-        title= title
-        link(rel='stylesheet', href='/style/style.css')
-        link(rel='stylesheet', href='/style/styleMenu.css')
-        link(rel='stylesheet', href='/style/styleInfo.css')
-        link(rel='icon', href='/images/favicon.png', type='image/x-icon')
-        script(src="/javascripts/menu.js")
-    body
-        include partials/header.pug
-        each affiche in affiches
-            div.center
-                img.pic.affiche(src=`/affiches/${affiche.picpath}`, alt='Affiche')
-                div.blockInfo
-                    h2= affiche.titre
-                    p= affiche.description
-                    p.subText= affiche.date_fin
-                    form(method='POST', action=`/affiche/delete/${affiche.id}`)
-                        button.redButton(type='submit') Supprimer
-        include partials/footer
+    include partials/header.pug
+    each affiche in affiches
+        div.center
+            img.pic.affiche(src=`/affiches/${affiche.picpath}`, alt='Affiche')
+            div.blockInfo
+                h2= affiche.titre
+                p= affiche.description
+                p.subText= affiche.date_fin
+                form(method='POST', action=`/affiche/delete/${affiche.id}`)
+                    button.redButton(type='submit') Supprimer
+    include partials/footer

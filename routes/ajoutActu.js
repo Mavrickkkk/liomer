@@ -5,7 +5,7 @@ const multer = require('multer');
 
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
-        cb(null, 'public/affiches/');
+        cb(null, 'public/actus/');
     },
     filename: function (req, file, cb) {
         cb(null, file.originalname);
@@ -23,20 +23,19 @@ function isAdmin(req, res, next) {
     }
 }
 
-router.get('/ajoutAffiche', isAdmin, function (req, res, next) {
-    res.render('ajoutAffiche', {title: 'Liomer - ajouter une affiche'});
+router.get('/ajoutActu', isAdmin, function (req, res, next) {
+    res.render('ajoutActu', {title: 'Liomer - ajouter une actualité'});
 });
 
-router.post('/envoyerAffiche', upload.single('file'), function (req, res, next) {
+router.post('/envoyerActu', upload.single('file'), function (req, res, next) {
     const titre = req.body.titre;
     const description = req.body.description;
     const picPath = req.file.filename;
-    const date_debut = new Date();
-    const date_fin = req.body.date;
+    const type = 1;
+    const actu = { titre, description, picPath, type };
 
-    const actu = { titre, description, picPath, date_debut, date_fin };
-
-    connection.query('INSERT INTO actu SET ?', actu, function (error, results, fields) {
+    const query = 'INSERT INTO actu (titre, description, picPath, type) VALUES (?, ?, ?, ?)';
+    connection.query(query, [actu.titre, actu.description, actu.picPath, actu.type], function (error, results, fields) {
         if (error) {
             res.send(error);
         } else {
@@ -44,5 +43,6 @@ router.post('/envoyerAffiche', upload.single('file'), function (req, res, next) 
         }
     });
 });
+
 
 module.exports = router;

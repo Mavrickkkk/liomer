@@ -1,40 +1,32 @@
 doctype html
 html
-    head
-        title= title
-        link(rel='stylesheet', href='/style/style.css')
-        link(rel='stylesheet', href='/style/styleMenu.css')
-        link(rel='stylesheet', href='/style/styleInfo.css')
-        link(rel='icon', href='/images/favicon.png', type='image/x-icon')
-        script(src="/javascripts/menu.js")
-    body
-        include partials/header.pug
-        div.center2
-            h2 L'agence postale
-        div.center.align-items-center.poste
-            img.pic.imagePresentation(src="/images/poste.jpeg", alt='agence postale')
-            div.blockInfo
-                h2 horaires
-                div.text-center
-                    div
-                        p.noMargin Lundi
-                        p.subText.noMargin 08h00 - 12h00
-                    div.lilMarginTop
-                        p.noMargin Mardi
-                        p.subText.noMargin 08h00 - 12h00
-                    div.lilMarginTop
-                        p.noMargin Mercredi
-                        p.subText.noMargin 08h00 - 12h00
-                    div.lilMarginTop
-                        p.noMargin Jeudi
-                        p.subText.noMargin 08h00 - 12h00
-                    div.lilMarginTop
-                        p.noMargin Vendredi
-                        p.subText.noMargin 08h00 - 12h00
-                    div.lilMarginTop
-                        p.noMargin Samedi
-                        p.subText.noMargin 08h00 - 12h00
-                    div.lilMarginTop
-                        p.noMargin Dimanche
-                        p.subText.noMargin Fermé
-        include partials/footer
+    include partials/header.pug
+    div.center2
+        h2 L'agence postale
+    div.center.align-items-center.poste
+        img.pic.imagePresentation(src="/images/poste.jpeg", alt='agence postale')
+        div.blockInfo
+            h2 horaires
+            div.text-center
+                div
+                    p.noMargin Lundi
+                    p.subText.noMargin 08h00 - 12h00
+                div.lilMarginTop
+                    p.noMargin Mardi
+                    p.subText.noMargin 08h00 - 12h00
+                div.lilMarginTop
+                    p.noMargin Mercredi
+                    p.subText.noMargin 08h00 - 12h00
+                div.lilMarginTop
+                    p.noMargin Jeudi
+                    p.subText.noMargin 08h00 - 12h00
+                div.lilMarginTop
+                    p.noMargin Vendredi
+                    p.subText.noMargin 08h00 - 12h00
+                div.lilMarginTop
+                    p.noMargin Samedi
+                    p.subText.noMargin 08h00 - 12h00
+                div.lilMarginTop
+                    p.noMargin Dimanche
+                    p.subText.noMargin Fermé
+    include partials/footer

@@ -28,6 +28,7 @@ app.use(express.urlencoded({ extended: true }));
 const index = require('./routes/index.js');
 const contacter = require('./routes/contacter.js')
 const ajoutAffiche = require('./routes/ajoutAffiche.js')
+const ajoutActu = require('./routes/ajoutActu.js')
 const affiche = require('./routes/affiche.js')
 const poste = require('./routes/poste.js')
 const mairie = require('./routes/mairie.js')
@@ -38,6 +39,7 @@ const connexion = require('./routes/connexion.js')
 app.use(index);
 app.use(contacter);
 app.use(ajoutAffiche);
+app.use(ajoutActu);
 app.use(affiche);
 app.use(poste);
 app.use(mairie);

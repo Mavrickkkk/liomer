@@ -1,121 +1,148 @@
 doctype html
 html
-    head
-        title= title
-        link(rel='stylesheet', href='/style/style.css')
-        link(rel='stylesheet', href='/style/styleMenu.css')
-        link(rel='stylesheet', href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css', integrity='sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==', crossorigin='anonymous')
-        link(rel='icon', href='/images/favicon.png', type='image/x-icon')
-        script(src="/javascripts/menu.js")
-    body
-        include partials/header.pug
-        div.backWhite
-            div.center.animate-on-scroll
-                img.pic.largeWidth(src="/images/home.png")
-            h2.nextPart.largeMarginLeft L'agenda
+    include partials/header.pug
+    div.backWhite.animate-on-scroll
+        div.center.animate-on-scroll-zoom
+            img.pic.largeWidth(src="/images/home.png")
+        h2.nextPart.largeMarginLeft.animate-on-scroll L'agenda
 
-            div.affiches-section
-                div#affichesContainer
-                    div#affichesWrapper
-                        each affiche in affiches
-                            div.flex-column(data-index=`${affiche.id}`)
-                                a(href=`/affiche/${affiche.id}`)
-                                    img.pic.affiche(src=`/affiches/${affiche.picpath}`, alt='Affiche')
-                                a.lilMarginTop.subText #{affiche.date_fin}
-                div#scrollButtonsContainer.marginTop
-                    button#scrollLeft
-                        i.fas.fa-angle-left
-                    button#scrollRight
-                        i.fas.fa-angle-right
+        div.affiches-section
+            div#affichesContainer
+                div#affichesWrapper
+                    each affiche in affiches
+                        div.flex-column(data-index=`${affiche.id}`)
+                            a(href=`/affiche/${affiche.id}`)
+                                img.pic.affiche.animate-on-scroll(src=`/affiches/${affiche.picpath}`, alt='Affiche')
+                            a.lilMarginTop.subText #{affiche.date_fin}
+            div#scrollButtonsContainer.marginTop.animate-on-scroll
+                button#scrollLeft
+                    i.fas.fa-angle-left
+                button#scrollRight
+                    i.fas.fa-angle-right
 
-            script.
-                const affichesContainer = document.getElementById('affichesContainer');
-                const affiches = document.querySelectorAll('.flex-column');
-                const scrollLeft = document.getElementById('scrollLeft');
-                const scrollRight = document.getElementById('scrollRight');
+        script.
+            const affichesContainer = document.getElementById('affichesContainer');
+            const affiches = document.querySelectorAll('.flex-column');
+            const scrollLeft = document.getElementById('scrollLeft');
+            const scrollRight = document.getElementById('scrollRight');
 
-                let currentIndex = 0;
+            let currentIndex = 0;
 
-                scrollLeft.addEventListener('click', function () {
-                    currentIndex = Math.max(0, currentIndex - 1);
-                    smoothScrollToIndex(currentIndex);
-                });
+            scrollLeft.addEventListener('click', function () {
+                currentIndex = Math.max(0, currentIndex - 1);
+                smoothScrollToIndex(currentIndex);
+            });
 
-                scrollRight.addEventListener('click', function () {
-                    currentIndex = Math.min(affiches.length - 1, currentIndex + 1);
-                    smoothScrollToIndex(currentIndex);
-                });
+            scrollRight.addEventListener('click', function () {
+                currentIndex = Math.min(affiches.length - 1, currentIndex + 1);
+                smoothScrollToIndex(currentIndex);
+            });
 
-                function smoothScrollTo(element, targetPosition, duration = 1000, easing = 'cubic-bezier(0.42, 0, 0.58, 1)') {
-                    const startPosition = element.scrollLeft;
-                    const distance = targetPosition - startPosition;
-                    let startTime = null;
+            function smoothScrollTo(element, targetPosition, duration = 1000, easing = 'cubic-bezier(0.42, 0, 0.58, 1)') {
+                const startPosition = element.scrollLeft;
+                const distance = targetPosition - startPosition;
+                let startTime = null;
 
-                    function animation(currentTime) {
-                        if (startTime === null) startTime = currentTime;
-                        const timeElapsed = currentTime - startTime;
-                        let progress = timeElapsed / duration;
+                function animation(currentTime) {
+                    if (startTime === null) startTime = currentTime;
+                    const timeElapsed = currentTime - startTime;
+                    let progress = timeElapsed / duration;
 
-                        if (progress > 1) progress = 1;
+                    if (progress > 1) progress = 1;
 
-                        const easingFunction = (t) => --t * t * t + 1;
+                    const easingFunction = (t) => --t * t * t + 1;
 
-                        const easedProgress = easingFunction(progress);
-                        element.scrollLeft = startPosition + distance * easedProgress;
+                    const easedProgress = easingFunction(progress);
+                    element.scrollLeft = startPosition + distance * easedProgress;
 
-                        if (progress < 1) requestAnimationFrame(animation);
-                    }
-
-                    requestAnimationFrame(animation);
+                    if (progress < 1) requestAnimationFrame(animation);
                 }
 
-                function smoothScrollToIndex(index) {
-                    const targetElement = affiches[index];
-                    const targetPosition = targetElement.offsetLeft;
+                requestAnimationFrame(animation);
+            }
 
-                    smoothScrollTo(affichesContainer, targetPosition); // Appeler la fonction smoothScrollTo() au lieu de affichesContainer.scrollTo()
-                }
+            function smoothScrollToIndex(index) {
+                const targetElement = affiches[index];
+                const targetPosition = targetElement.offsetLeft;
 
-        div.center.marginTop
+                smoothScrollTo(affichesContainer, targetPosition); // Appeler la fonction smoothScrollTo() au lieu de affichesContainer.scrollTo()
+            }
+    if admin==1
+        div.center.marginTop.animate-on-scroll-zoom
             a.whiteButton(href="/ajoutAffiche") Ajouter une affiche
-        h2.nextPart.largeMarginLeft Informations
-        div.center.tel
-            div.block.centerV.marginLeft
-                div.marginLeft.marginTop
-                    p.green.lilMarginBottom horaires de la mairie
-                    br
+    h2.nextPart.largeMarginLeft.animate-on-scroll Informations
+    div.center.tel.animate-on-scroll-zoom
+        div.block.centerV.marginLeft
+            div.marginLeft.marginTop
+                p.green.lilMarginBottom horaires de la mairie
+                br
+                div.lilMarginBottom
+                    p.noMargin Lundi
+                    p.subText.noMargin 09h00 - 12h00 et 13h30 - 17h30
+                div.lilMarginBottom
+                    p.noMargin Mardi
+                    p.subText.noMargin 09h00 - 12h00
+                div.lilMarginBottom
+                    p.noMargin Mercredi
+                    p.subText.noMargin 09h45 - 12h00
+                div
+                    p.noMargin vendredi
+                    p.subText.noMargin 14h30 - 16h30
+        div.block.centerV
+            div.marginLeft.marginTop
+                p.red Coordonnées
+                br
+                div.lilMarginBottom
+                    p.noMargin Adresse
+                    p.subText.noMargin Pl. du 17 Août, 80430 Liomer
+                div.lilMarginBottom
+                    p.noMargin Téléphone
+                    p.subText.noMargin à remplir
+                div.lilMarginBottom
+                    p.noMargin E-mail
+                    p.subText.noMargin à remplir
+            div.center.marginBottom
+                a.redButton(href="/contacter") nous contacter
+        div.block.centerV
+            div.marginLeft.marginTop
+                p.blue Évènement à venir
+                br
+                if events.length > 0
                     div.lilMarginBottom
-                        p.noMargin Lundi
-                        p.subText.noMargin 09h00 - 12h00 et 13h30 - 17h30
-                    div.lilMarginBottom
-                        p.noMargin Mardi
-                        p.subText.noMargin 09h00 - 12h00
-                    div.lilMarginBottom
-                        p.noMargin Mercredi
-                        p.subText.noMargin 09h45 - 12h00
-                    div
-                        p.noMargin vendredi
-                        p.subText.noMargin 14h30 - 16h30
-            div.block.centerV
-                div.marginLeft.marginTop
-                    p.red Coordonnées
-                    br
-                    div.lilMarginBottom
-                        p.noMargin Adresse
-                        p.subText.noMargin Pl. du 17 Août, 80430 Liomer
-                    div.lilMarginBottom
-                        p.noMargin Téléphone
-                        p.subText.noMargin à remplir
-                    div.lilMarginBottom
-                        p.noMargin E-mail
-                        p.subText.noMargin à remplir
-                div.center
-                    a.redButton(href="/contacter") nous contacter
-                    p.
-            div.block.centerV
-                div.marginLeft.marginTop
-                    p.blue Évènement à venir
-                    br
+                        each event in events
+                            div.event.lilMarginTop
+                                p.noMargin #{event.nom}
+                                p.subText.noMargin #{event.date}
+                                if admin == 1
+                                    form(method='POST', action=`/evenement/${event.id}/supprimer`)
+                                        button.delete-event-btn(type='submit') X
+                else
                     div.lilMarginBottom.marginTop
                         p.subText.noMargin Aucun évènement à venir
-        include partials/footer
+            if admin == 1
+                div.center
+                    p.blueButton#add-event-btn +
+                div.center
+                    form#add-event-form(style='display: none;' , action='/evenement', method='post')
+                        div.marginLeft
+                            p.subText Date
+                            input.input(type='date', name='event-date')
+                            p.subText Nom de l'évènement
+                            input.input(type='text', name='event-name')
+                        div.center.marginBottom
+                            button.submitForm(type='submit') Ajouter
+        script.
+            const addEventBtn = document.getElementById('add-event-btn');
+            const addEventForm = document.getElementById('add-event-form');
+            addEventBtn.addEventListener('click', () => {
+                if (addEventForm.style.display === 'none') {
+                    addEventForm.style.display = 'block';
+                } else {
+                    addEventForm.style.display = 'none';
+                }
+            });
+    h2.nextPart.largeMarginLeft.animate-on-scroll Actualités
+    if admin == 1
+        div.center.marginTop.animate-on-scroll-zoom
+            a.whiteButton(href="/ajoutActu") Ajouter une actualité
+    include partials/footer

@@ -1,19 +1,34 @@
-#menuToggle
-    input(type='checkbox')
-    span
-    span
-    span
-#menu
-    a(href='/') Menu
-    a(href='/mairie') Mairie
-    p.subText.noMargin horaires, présentation, compte rendu des réunions, élus et photos
-    a(href='/poste') L'agence postale
-    p.subText.noMargin horaires
-    a(href='/info_utiles') Services
-    p.subText.noMargin SPA, déchetterie, numéro de secours
-    a(href='/associations') Vie associative
-    p.subText.noMargin liste des associations, informations
-    a(href='/connexion') Me connecter
-    p.subText.noMargin je suis administrateur
-h1.largeMarginLeft.marginTop Liomer
-    span.subText  le site officiel
+head
+    title= title
+    link(rel='stylesheet', href='/style/style.css')
+    link(rel='stylesheet', href='/style/styleMenu.css')
+    link(rel='stylesheet', href='/style/styleFormulaire.css')
+    link(rel='stylesheet', href='/style/styleInfo.css')
+    link(rel='stylesheet', href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css', integrity='sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==', crossorigin='anonymous')
+    link(rel='icon', href='/images/favicon.png', type='image/x-icon')
+    script(src="/javascripts/menu.js")
+    script(src="/javascripts/animate.js")
+
+body
+    #menuToggle
+        input(type='checkbox')
+        span
+        span
+        span
+
+    div#header-band
+
+    #menu
+        a(href='/') Menu
+        a(href='/mairie') Mairie
+        p.subText.noMargin horaires, présentation, compte rendu des réunions, élus et photos
+        a(href='/poste') L'agence postale
+        p.subText.noMargin horaires
+        a(href='/info_utiles') Services
+        p.subText.noMargin SPA, déchetterie, numéro de secours
+        a(href='/associations') Vie associative
+        p.subText.noMargin liste des associations, informations
+        a(href='/connexion') Me connecter
+        p.subText.noMargin je suis administrateur
+    h1.largeMarginLeft.largeMarginTop Liomer
+        span.subText  le site officiel

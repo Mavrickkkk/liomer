@@ -3,9 +3,9 @@ html
     include partials/header.pug
     div.center
         div.formulaire
-            h1 Ajouter une affiche
+            h1 Ajouter une actualité
             p.subText * Toutes les données ci-dessous sont requises
-            form.form(action='/envoyerAffiche', method='post', enctype='multipart/form-data')
+            form.form(action='/envoyerActu', method='post', enctype='multipart/form-data')
                 p titre
                 input.input(type='text', id='titre', name='titre', required)
                 p description
@@ -15,9 +15,6 @@ html
                 .custom-file-upload
                     input#fileInput(type='file', name='file', accept='image/png, image/jpeg, image/jpg', required)
                     label(for='fileInput') +
-                p date de l'événement (ou fin)
-                input.input(type='date', id='date', name='date', required)
-
                 div.center
                     button.submitForm(type='submit') Envoyer
     include partials/footer

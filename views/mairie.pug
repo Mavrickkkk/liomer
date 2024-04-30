@@ -1,47 +1,39 @@
 doctype html
 html
-    head
-        title= title
-        link(rel='stylesheet', href='/style/style.css')
-        link(rel='stylesheet', href='/style/styleMenu.css')
-        link(rel='stylesheet', href='/style/styleInfo.css')
-        link(rel='icon', href='/images/favicon.png', type='image/x-icon')
-        script(src="/javascripts/menu.js")
-    body
-        include partials/header.pug
-        div.center2.marginBottom
-            div.blueTop
-            div.blueTop.whiteTop
-            div.blueTop.redTop
-        div.center2
-            h2 La mairie
-        div.center.align-items-center
-            img.pic.largeWidth(src="/images/mairie.png", alt='mairie')
-        div.center
-            div.blockInfoLarge.centerV.marginLeft
-                div.marginLeft.marginTop
-                    p.green.lilMarginBottom horaires de la mairie
-                    br
-                    div.lilMarginBottom
-                        p.noMargin Lundi
-                        p.subText.noMargin 09h00 - 12h00 et 13h30 - 17h30
-                    div.lilMarginBottom
-                        p.noMargin Mardi
-                        p.subText.noMargin 09h00 - 12h00
-                    div.lilMarginBottom
-                        p.noMargin Mercredi
-                        p.subText.noMargin 09h45 - 12h00
-                    div
-                        p.noMargin vendredi
-                        p.subText.noMargin 14h30 - 16h30
-        div.center
-            div.blockInfoLarge
-                h2 Présentation
-                p.subText.marginLeft Liomer est une commune située dans la Somme,
-        div.center
-            div.blockInfoLarge
-                h2 Compte rendu des réunions
-        div.center
-            div.blockInfoLarge
-                h2 Élus
-        include partials/footer
+    include partials/header.pug
+    div.center2.marginBottom
+        div.blueTop
+        div.blueTop.whiteTop
+        div.blueTop.redTop
+    div.center2
+        h2 La mairie
+    div.center.align-items-center
+        img.pic.largeWidth(src="/images/mairie.png", alt='mairie')
+    div.center
+        div.blockInfoLarge.centerV.marginLeft
+            div.marginLeft.marginTop
+                p.green.lilMarginBottom horaires de la mairie
+                br
+                div.lilMarginBottom
+                    p.noMargin Lundi
+                    p.subText.noMargin 09h00 - 12h00 et 13h30 - 17h30
+                div.lilMarginBottom
+                    p.noMargin Mardi
+                    p.subText.noMargin 09h00 - 12h00
+                div.lilMarginBottom
+                    p.noMargin Mercredi
+                    p.subText.noMargin 09h45 - 12h00
+                div
+                    p.noMargin vendredi
+                    p.subText.noMargin 14h30 - 16h30
+    div.center
+        div.blockInfoLarge
+            h2 Présentation
+            p.subText.marginLeft Liomer est une commune située dans la Somme,
+    div.center
+        div.blockInfoLarge
+            h2 Compte rendu des réunions
+    div.center
+        div.blockInfoLarge
+            h2 Élus
+    include partials/footer
