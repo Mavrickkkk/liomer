@@ -32,10 +32,11 @@ router.post('/envoyerActu', upload.single('file'), function (req, res, next) {
     const description = req.body.description;
     const picPath = req.file.filename;
     const type = 1;
-    const actu = { titre, description, picPath, type };
+    const date_debut = new Date();
+    const actu = { titre, description, picPath, date_debut, type };
 
-    const query = 'INSERT INTO actu (titre, description, picPath, type) VALUES (?, ?, ?, ?)';
-    connection.query(query, [actu.titre, actu.description, actu.picPath, actu.type], function (error, results, fields) {
+    const query = 'INSERT INTO actu (titre, description, picPath, date_debut, type) VALUES (?, ?, ?, ?, ?)';
+    connection.query(query, [actu.titre, actu.description, actu.picPath, actu.date_debut, actu.type], function (error, results, fields) {
         if (error) {
             res.send(error);
         } else {
