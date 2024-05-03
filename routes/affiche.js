@@ -7,7 +7,7 @@ router.get('/affiche/:idAffiche', function (req, res) {
     const idAffiche = req.params.idAffiche;
     connection.query('SELECT * FROM actu WHERE id=?', [idAffiche], (err, rowAffiche) => {
         if (err) {
-            console.error('Erreur lors de la récupération des dessins :', err);
+            console.error('Erreur lors de la récupération des affiches :', err);
             res.status(500).send('Erreur serveur');
             return;
         }

@@ -35,6 +35,8 @@ const mairie = require('./routes/mairie.js')
 const info_utiles = require('./routes/info_utiles.js')
 const associations = require('./routes/associations.js')
 const connexion = require('./routes/connexion.js')
+const moderation = require('./routes/moderation.js')
+const actus = require('./routes/actus.js')
 
 app.use(index);
 app.use(contacter);
@@ -46,6 +48,8 @@ app.use(mairie);
 app.use(info_utiles);
 app.use(associations);
 app.use(connexion);
+app.use(moderation);
+app.use(actus);
 
 const port = 3000;
 server.listen(port, () => {

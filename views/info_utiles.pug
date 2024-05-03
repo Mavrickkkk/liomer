@@ -1,29 +1,54 @@
 doctype html
 html
     include partials/header.pug
-
+    div.center
+        h2 Éducation
     div.center
         div.blockInfoLarge
-            h2 Informations utiles
-            p SPA
+            h3 École primaire
+            p.subText Informations à ajouter + photo
+    div.center
+        div.blockInfoLarge
+            h3 École maternelle
+            p.subText Informations à ajouter + photo
+    div.center
+        h2 Économie
+    div.center
+        div.blockInfoLarge
+            h3 Usine de parfum
+            p.subText Informations à ajouter + photo
+    div.center
+        div.blockInfoLarge
+            h3 Centre de formation / recyclerie
+            p.subText Informations à ajouter + photo
+    div.center
+        h2 Services
+    div.center
+        div.blockInfoLarge
+            h3 SPA
             p.subText Oisemont Protection Animale: 24 Rue Jean Jaurès, 80140 Oisemont – 03 22 25 12 37
     div.center
         div.blockInfoLarge
-            h2 Déchetterie
+            h3 Déchetterie
             p.subText La commune de Liomer est rattaché à la déchetterie de Trinoval située à Thieulloy-L’abbaye.
-                a.subText.marginLeft.blueButton(href="https://www.trinoval.fr/Prestations-et-services/Particuliers/Dechetteries") Plus d'informations
+                a.subText.blue(href="https://www.trinoval.fr/Prestations-et-services/Particuliers/Dechetteries")=` Plus d'informations`
     div.center
         div.blockInfoLarge
-            p Numéro à contacter en cas d'urgence
-            p Samu
-                span.subText.marginLeft 15
-            p Pompier
-                span.subText.marginLeft 18
-            p Urgences
-                span.subText.marginLeft 112
-            p Police
-                span.subText.marginLeft 17
+            h3 Plan local d'urbanisme
     div.center
-        div.blockInfoLarge
-            p Projet d'aménagement urbain
+        div.blockInfo
+            h3 Numéro à contacter en cas d'urgence
+            div.center.flex-column
+                p.noMargin Samu
+                p.subText.noMargin 15
+            div.center.flex-column.lilMarginTop
+                p.noMargin Pompier
+                p.subText.noMargin 18
+            div.center.flex-column.lilMarginTop
+                p.noMargin Urgences
+                p.subText.noMargin 112
+            div.center.flex-column.lilMarginTop
+                p.noMargin Police
+                p.subText.noMargin 17
+
     include partials/footer

@@ -10,30 +10,66 @@ html
     div.center.align-items-center
         img.pic.largeWidth(src="/images/mairie.png", alt='mairie')
     div.center
-        div.blockInfoLarge.centerV.marginLeft
-            div.marginLeft.marginTop
-                p.green.lilMarginBottom horaires de la mairie
-                br
-                div.lilMarginBottom
+        div.blockInfo.centerV
+            div
+                div.center
+                    p.green.lilMarginBottom horaires de la mairie
+                    br
+                div.lilMarginBottom.center.flex-column
                     p.noMargin Lundi
                     p.subText.noMargin 09h00 - 12h00 et 13h30 - 17h30
-                div.lilMarginBottom
+                div.lilMarginBottom.center.flex-column
                     p.noMargin Mardi
                     p.subText.noMargin 09h00 - 12h00
-                div.lilMarginBottom
+                div.lilMarginBottom.center.flex-column
                     p.noMargin Mercredi
                     p.subText.noMargin 09h45 - 12h00
-                div
+                div.center.flex-column
                     p.noMargin vendredi
                     p.subText.noMargin 14h30 - 16h30
     div.center
         div.blockInfoLarge
-            h2 Présentation
-            p.subText.marginLeft Liomer est une commune située dans la Somme,
+            p.marginLeft Présentation
+            p.subText.marginLeft Liomer est une commune située dans la Somme, en région Haut-de-France. En 2021 elle comptait 386 habitants pour une surface de 3.89km². Elle est traversée par le Liger
+            p.marginLeft Fait historique notable
+            p.subText.marginLeft Le 17 août 1944, les populations de Liomer et Brocourt sont malmenées. Les deux villages sont entourés par des troupes dirigées par des SS, aux premières heures du jour. Les femmes, les personnes âgées et les enfants sont regroupés dans la cour de l'hôtel de ville par l'occupant allemand. Les hommes sont rassemblés sur la place pour être emprisonnés à Amiens. Les villageois qui tentent de fuir sont abattus. L'abbé Michel Lyonneau, parlant allemand, entreprendra des négociations qui permettront la libération des personnes arrêtées. (wikipédia)
+            p.subText.marginLeft Une rue a été baptisée en son honneur pour son acte de bravoure.
+
     div.center
         div.blockInfoLarge
-            h2 Compte rendu des réunions
+            h3 Compte rendu des réunions
+            each compteRendu in comptesRendus
+                p Compte rendu du
+                    span.blue= ` ${compteRendu.date_creation} `
+                    a(href=`/compte_rendu/${compteRendu.filePath}`)
+                        button.subText.blue Télécharger
+                    if admin==1
+                        form(method="POST", action=`/mairie/supprimer/${compteRendu.id}`)
+                            button.subText.red Supprimer
+                div.marginBottom
+            if admin == 1
+                form.form(action='/envoyerCompteRendu', method='post', enctype='multipart/form-data')
+                    div.center
+                        p.noMargin ajouter un compte rendu
+                    div.center.marginBottom
+                        p.subText.noMargin * de préférence en pdf
+                    div.center
+                        .custom-file-upload
+                            input#fileInput(type='file', name='file', accept='image/png, image/jpeg, image/jpg, application/pdf', required)
+                            label(for='fileInput') +
+                    div.center
+                        button.submitForm(type='submit') Envoyer
     div.center
         div.blockInfoLarge
-            h2 Élus
+            h3 Élus
+    div.largeMarginLeft
+        h3 Photos
+    script.
+        const fileInput = document.querySelector('#fileInput');
+        const label = document.querySelector('.custom-file-upload label');
+
+        fileInput.addEventListener('change', () => {
+            const fileName = fileInput.files[0].name;
+            label.textContent = fileName;
+        });
     include partials/footer

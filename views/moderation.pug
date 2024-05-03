@@ -1,0 +1,18 @@
+doctype html
+html
+    include partials/header.pug
+    div.center
+        div.blockInfoLarge
+            h2 Derniers messages
+            each contact in contacts
+                p.noMargin= contact.sujet
+                p.subText.noMargin= contact.message
+                p.subText Par
+                    span.subText.blue= ` ${contact.prenom} `
+                    span.subText.blue= `${contact.nom} `
+                    span.subText= `( ${contact.mail} )`
+                form(method='POST', action='/supprimerMessage', style='display: inline;')
+                    input(type='hidden', name='id', value=contact.id)
+                    button.subText.blue(type='submit') Lu
+                div.marginBottom
+    include partials/footer

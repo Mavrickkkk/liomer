@@ -4,21 +4,9 @@ html
     div.center
         div.fullBlueTop
     div.center
-        div.blockInfoLarge
-            h2 Comité des fêtes
-            p.marginLeft Comité des fêtes de Liomer
-                span.subText.marginLeft Dominique Manier 06 45 87 63 43
+        h2 Associations
     div.center
         div.blockInfoLarge
-            h2 Associations
-            h3 titre
-            p.subText description de l'association
-            p Président(e)
-                span.subText.marginLeft description
-            p Adresse
-                span.subText.marginLeft description
-            p Coordonnées
-                span.subText.marginLeft description
             div.marginBottom
             each association in associations
                 h3= association.nom
@@ -29,28 +17,27 @@ html
                     span.subText.marginLeft= association.adresse
                 p Coordonnées
                     span.subText.marginLeft= association.coordonnees
+                if admin == 1
+                    form(action=`/associations/delete/${association.id}`, method='post')
+                        button.subText.red(type='submit') Supprimer
                 div.marginBottom
-
-    div.center
-        a.blueButton ajouter une association
-    div.center
-        div.formulaire
-            h1 Ajout d'une association
-            p.subText * Toutes les données ci dessous sont requises
-            form.form(action='/associations', method='post')
-                p nom de l'association
-                input.input(type='text', id='nom', name='nom', required)
-                p description
-                textarea.input.textArea(id='description', name='description', required)
-                p président
-                input.input(type='text', id='president', name='president', required)
-                p adresse
-                input.input(type='text', id='adresse', name='adresse', required)
-                p coordonnée
-                    span.subText  (numéro de téléphone ou adresse mail)
-                input.input(type='text', id='coordonnee', name='coordonnee', required)
-                div.center
-                    button.submitForm(type='submit') Envoyer
-                div.center
-                    p.subText * Votre demande sera étudiée avant d'être publiée
+    if admin == 1
+        div.center
+            div.formulaire
+                h1 Ajout d'une association
+                p.subText * Toutes les données ci dessous sont requises
+                form.form(action='/associations', method='post')
+                    p nom de l'association
+                    input.input(type='text', id='nom', name='nom', required)
+                    p description
+                    textarea.input.textArea(id='description', name='description', required)
+                    p président
+                    input.input(type='text', id='president', name='president', required)
+                    p adresse
+                    input.input(type='text', id='adresse', name='adresse', required)
+                    p coordonnée
+                        span.subText  (numéro de téléphone, adresse mail ou les deux)
+                    input.input(type='text', id='coordonnee', name='coordonnee', required)
+                    div.center
+                        button.submitForm(type='submit') Envoyer
     include partials/footer

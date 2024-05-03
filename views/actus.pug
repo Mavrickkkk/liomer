@@ -1,0 +1,12 @@
+doctype html
+html
+    include partials/header.pug
+    each actualite in actualites
+        div.flex-column.marginBottom.animate-on-scroll(data-index=`${actualite.id}`)
+            img.pic.actus(src=`/actus/${actualite.picpath}`, alt='Affiche')
+            p.noMargin=actualite.titre
+            p.subText.noMargin.text-center.midWidth=actualite.description
+    if admin == 1
+        div.center.marginTop.animate-on-scroll-zoom
+            a.whiteButton(href="/ajoutActu") Ajouter une actualité
+    include partials/footer

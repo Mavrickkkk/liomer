@@ -84,7 +84,7 @@ a {
 }
 
 .largeMarginLeft {
-  margin-left: 70px;
+  margin-left: 130px;
 }
 
 .marginBottom {
@@ -273,7 +273,6 @@ a {
 #scrollButtonsContainer {
   position: absolute;
   bottom: -40px;
-  right: 30px;
   display: flex;
   z-index: 1;
 }
@@ -343,7 +342,7 @@ a {
   }
 
   .largeMarginLeft {
-    margin-left: 20px;
+    margin-left: 100px;
   }
 }
 
@@ -404,4 +403,14 @@ form {
   width: 50vw;
   margin: 0px 30px;
   transition: transform 0.3s ease;
+}
+
+.delete-event-btn {
+  border: none;
+  font-family: mysemibold, sans-serif;
+  color: red;
+  background-color: white;
+  cursor: pointer;
+  font-size: 100%;
+  padding: 0;
 }

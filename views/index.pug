@@ -14,7 +14,7 @@ html
                             a(href=`/affiche/${affiche.id}`)
                                 img.pic.affiche.animate-on-scroll(src=`/affiches/${affiche.picpath}`, alt='Affiche')
                             a.lilMarginTop.subText #{affiche.date_fin}
-            div#scrollButtonsContainer.marginTop.animate-on-scroll
+            div#scrollButtonsContainer.marginTop.center2.animate-on-scroll
                 button#scrollLeft
                     i.fas.fa-angle-left
                 button#scrollRight
@@ -70,7 +70,7 @@ html
     if admin==1
         div.center.marginTop.animate-on-scroll-zoom
             a.whiteButton(href="/ajoutAffiche") Ajouter une affiche
-    h2.nextPart.largeMarginLeft.animate-on-scroll Informations
+    h2.nextPart.largeMarginLeft.animate-on-scroll.marginBottom Informations
     div.center.tel.animate-on-scroll-zoom
         div.block.centerV.marginLeft
             div.marginLeft.marginTop
@@ -101,8 +101,11 @@ html
                 div.lilMarginBottom
                     p.noMargin E-mail
                     p.subText.noMargin à remplir
-            div.center.marginBottom
-                a.redButton(href="/contacter") nous contacter
+            div.center
+                a.subText.redButton(href="/contacter") nous contacter
+            div.center.marginBottom.lilMarginTop
+                if admin == 1
+                    a.subText.red(href="/moderation") voir les messages
         div.block.centerV
             div.marginLeft.marginTop
                 p.blue Évènement à venir
@@ -115,13 +118,13 @@ html
                                 p.subText.noMargin #{event.date}
                                 if admin == 1
                                     form(method='POST', action=`/evenement/${event.id}/supprimer`)
-                                        button.delete-event-btn(type='submit') X
+                                        button.delete-event-btn(type='submit') supprimer
                 else
                     div.lilMarginBottom.marginTop
                         p.subText.noMargin Aucun évènement à venir
             if admin == 1
                 div.center
-                    p.blueButton#add-event-btn +
+                    p.subText.blueButton#add-event-btn +
                 div.center
                     form#add-event-form(style='display: none;' , action='/evenement', method='post')
                         div.marginLeft
@@ -147,6 +150,8 @@ html
             img.pic.actus(src=`/actus/${actualite.picpath}`, alt='Affiche')
             p.noMargin=actualite.titre
             p.subText.noMargin.text-center.midWidth=actualite.description
+        div.center.marginTop.animate-on-scroll-zoom
+            a.whiteButton(href="/actus") Voir plus
     if admin == 1
         div.center.marginTop.animate-on-scroll-zoom
             a.whiteButton(href="/ajoutActu") Ajouter une actualité
