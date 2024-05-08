@@ -23,10 +23,14 @@ body
         a(href='/mairie') La mairie
         p.subText.noMargin horaires, présentation, compte rendu des réunions, élus et photos
         a(href='/info_utiles') Informations
-        p.subText.noMargin Économie, Services
+        p.subText.noMargin éducation, économie et services
         a(href='/associations') Vie associative
         p.subText.noMargin liste des associations, informations
-        a(href='/connexion') Espace administrateur
-        p.subText.noMargin je suis administrateur
+        if admin!=1
+            a(href='/connexion') Espace administrateur
+            p.subText.noMargin je me connecte
+        else
+            a(href='/moderation') Espace administrateur
+            p.subText.noMargin mes messages, changer les horaires de la mairie, me déconnecter
     h1.largeMarginLeft.largeMarginTop Liomer
         span.subText  le site officiel

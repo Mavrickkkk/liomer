@@ -3,7 +3,21 @@ html
     include partials/header.pug
     div.backWhite.animate-on-scroll
         div.center.animate-on-scroll
-            img.pic.largeWidth(src="/images/home.png")
+            img.pic.largeWidth(src=`/images/${homeImage}`, alt='Image d\'accueil')
+        if admin==1
+            div.center
+                p.subText.blueButton#editImageButton modifier l'image
+            form#imageForm.form(action='/envoyerPhoto/1', method='post', enctype='multipart/form-data', style='display: none;')
+                div.center2
+                    p changer l'image
+                div.center2
+                    p.subText * uniquement png jpg ou jpeg
+                div.center2
+                        .custom-file-upload
+                            input#fileInput(type='file', name='file', accept='image/png, image/jpeg, image/jpg', required)
+                            label(for='fileInput') +
+                div.center2
+                    button.submitForm(type='submit') Envoyer
         h2.nextPart.largeMarginLeft.animate-on-scroll L'agenda
 
         div.affiches-section
@@ -21,6 +35,7 @@ html
                     i.fas.fa-angle-right
 
         script.
+            // menu déroulant des affiches
             const affichesContainer = document.getElementById('affichesContainer');
             const affiches = document.querySelectorAll('.flex-column');
             const scrollLeft = document.getElementById('scrollLeft');
@@ -67,6 +82,27 @@ html
 
                 smoothScrollTo(affichesContainer, targetPosition); // Appeler la fonction smoothScrollTo() au lieu de affichesContainer.scrollTo()
             }
+            //afficher le formulaire de modification de l'image
+            const editImageButton = document.getElementById('editImageButton');
+            const imageForm = document.getElementById('imageForm');
+
+            editImageButton.addEventListener('click', function () {
+                if (imageForm.style.display === 'none') {
+                    imageForm.style.display = 'block';
+                } else {
+                    imageForm.style.display = 'none';
+                }
+            });
+
+            // envoyer l'image dans la base de donnée
+            const fileInput = document.querySelector('#fileInput');
+            const label = document.querySelector('.custom-file-upload label');
+
+            fileInput.addEventListener('change', () => {
+                const fileName = fileInput.files[0].name;
+                label.textContent = fileName;
+            });
+            
     if admin==1
         div.center.marginTop.animate-on-scroll-zoom
             a.whiteButton(href="/ajoutAffiche") Ajouter une affiche
@@ -76,18 +112,10 @@ html
             div.marginLeft.marginTop
                 p.green.lilMarginBottom horaires de la mairie
                 br
-                div.lilMarginBottom
-                    p.noMargin Lundi
-                    p.subText.noMargin 09h00 - 12h00 et 13h30 - 17h30
-                div.lilMarginBottom
-                    p.noMargin Mardi
-                    p.subText.noMargin 09h00 - 12h00
-                div.lilMarginBottom
-                    p.noMargin Mercredi
-                    p.subText.noMargin 09h45 - 12h00
-                div
-                    p.noMargin vendredi
-                    p.subText.noMargin 14h30 - 16h30
+                each horaire in horaires
+                    div.lilMarginBottom
+                        p.noMargin= horaire.jour
+                        p.subText.noMargin= horaire.heures
         div.block.centerV
             div.marginLeft.marginTop
                 p.red Coordonnées
@@ -135,6 +163,7 @@ html
                         div.center.marginBottom
                             button.submitForm(type='submit') Ajouter
         script.
+            // afficher le bouton de modification des évènements
             const addEventBtn = document.getElementById('add-event-btn');
             const addEventForm = document.getElementById('add-event-form');
             addEventBtn.addEventListener('click', () => {
@@ -150,8 +179,11 @@ html
             img.pic.actus(src=`/actus/${actualite.picpath}`, alt='Affiche')
             p.noMargin=actualite.titre
             p.subText.noMargin.text-center.midWidth=actualite.description
-        div.center.marginTop.animate-on-scroll-zoom
-            a.whiteButton(href="/actus") Voir plus
+            if admin == 1
+                div.lilMarginTop
+                    a.redButton.subText(href=`/supprimer-actualite/${actualite.id}`) Supprimer
+    div.center.marginTop.animate-on-scroll-zoom
+        a.whiteButton(href="/actus") Voir plus
     if admin == 1
         div.center.marginTop.animate-on-scroll-zoom
             a.whiteButton(href="/ajoutActu") Ajouter une actualité

@@ -22,7 +22,7 @@ router.get('/affiche/:idAffiche', function (req, res) {
             return { ...affiche, date_fin: formattedDateFin };
         });
 
-        res.render('affiche', {title: 'Liomer - Actu', affiches});
+        res.render('affiche', {title: 'Liomer - Actu', affiches, admin: req.session.admin});
     });
 });
 

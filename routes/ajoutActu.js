@@ -24,7 +24,7 @@ function isAdmin(req, res, next) {
 }
 
 router.get('/ajoutActu', isAdmin, function (req, res, next) {
-    res.render('ajoutActu', {title: 'Liomer - ajouter une actualité'});
+    res.render('ajoutActu', {title: 'Liomer - ajouter une actualité', admin: req.session.admin});
 });
 
 router.post('/envoyerActu', upload.single('file'), function (req, res, next) {

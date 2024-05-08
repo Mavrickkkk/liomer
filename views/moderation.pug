@@ -15,4 +15,17 @@ html
                     input(type='hidden', name='id', value=contact.id)
                     button.subText.blue(type='submit') Lu
                 div.marginBottom
+    div.center
+        div.formulaire
+            h1 Changer les horaires de la mairie
+            p.subText * Modifier uniquement les jours nécessaires
+            form.form(action='/changerHoraire', method='post')
+                each horaire in horaires
+                    p=horaire.jour
+                    input.input(type='text', id=horaire.jour, name=horaire.jour, required, value=horaire.heures)
+                div.center
+                    button.submitForm(type='submit') Envoyer
+    div.center.lilMarginTop
+        div.lilMarginTop
+            a.redButton.subText(href='/logout') Je me déconnecte
     include partials/footer

@@ -1,11 +1,34 @@
 const express = require('express');
 const router = express.Router();
 const connection = require('../database');
+const multer = require('multer');
+const path = require('path');
+const fs = require('fs');
+
+
+const storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+        cb(null, 'public/images/');
+    },
+    filename: function (req, file, cb) {
+        cb(null, file.originalname);
+    }
+});
+
+const upload = multer({storage: storage});
 
 // Fonction pour valider l'adresse e-mail
 function isValidEmail(email) {
     const regex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/;
     return regex.test(email);
+}
+
+function isAdmin(req, res, next) {
+    if (req.session.admin === 1) {
+        next();
+    } else {
+        res.redirect('/');
+    }
 }
 
 router.get('/', function (req, res, next) {
@@ -40,7 +63,7 @@ router.get('/', function (req, res, next) {
         });
 
         // Récupérer les affiches de la base de données
-        connection.query('SELECT * FROM actu WHERE type=0 ORDER BY date_fin ASC', (err, rows) => {
+        connection.query('SELECT * FROM actu WHERE type=0 AND date_fin > CURDATE() ORDER BY date_fin ASC', (err, rows) => {
             if (err) {
                 console.error('Erreur lors de la récupération des affiches :', err);
                 res.status(500).send('Erreur serveur');
@@ -74,13 +97,35 @@ router.get('/', function (req, res, next) {
                     return {...actualite, date_creation: formattedDateCreation};
                 });
 
-                // Rendre la page d'accueil avec les affiches, les événements et les actualités
-                res.render('index', {
-                    title: 'Liomer - Accueil',
-                    affiches,
-                    events,
-                    actualites,
-                    admin: req.session.admin
+                connection.query('SELECT picpath FROM photos WHERE type=1', (err, rows) => {
+                    if (err) {
+                        console.error('Erreur lors de la récupération de l\'image d\'accueil :', err);
+                        res.status(500).send('Erreur serveur');
+                        return;
+                    }
+
+                    let homeImage = '';
+                    if (rows.length > 0) {
+                        homeImage = rows[0].picpath;
+                    }
+                    connection.query('SELECT * FROM horaire_mairie', (err, horaires) => {
+                        if (err) {
+                            console.error('Erreur lors de la récupération des horaires de la mairie :', err);
+                            res.status(500).send('Erreur serveur');
+                            return;
+                        }
+
+                        // Rendre la page d'accueil avec les affiches, les événements et les actualités
+                        res.render('index', {
+                            title: 'Liomer - Accueil',
+                            affiches,
+                            events,
+                            actualites,
+                            homeImage,
+                            horaires,
+                            admin: req.session.admin
+                        });
+                    });
                 });
             });
         });
@@ -125,6 +170,47 @@ router.post('/evenement/:id/supprimer', (req, res) => {
     });
 });
 
+router.post('/envoyerPhoto/:type', isAdmin , upload.single('file'), function (req, res, next) {
+    const type = req.params.type;
+    const file = req.file;
+
+    if (!file) {
+        res.status(400).send('No file uploaded.');
+        return;
+    }
+    // Mettre à jour la base de données avec le nouveau nom de fichier et le type correspondant
+    const updateImageQuery = 'UPDATE photos SET picpath = ?, type = ? WHERE type = ?';
+    connection.query(updateImageQuery, [file.filename, type, type], function (error, results, fields) {
+        if (error) {
+            res.send(error);
+            return;
+        }
+
+        // Récupérer l'ancienne image en fonction du type
+        const oldImageQuery = 'SELECT picpath FROM photos WHERE type = ? AND picpath != ?';
+        connection.query(oldImageQuery, [type, file.filename], function (err, results, fields) {
+            if (err) {
+                res.send(err);
+                return;
+            }
+
+            if (results.length > 0) {
+                const oldImagePath = results[0].picpath;
+                const oldImageFullPath = path.join(__dirname, '../public/images', oldImagePath);
+
+                // Supprimer le fichier de l'ancienne image
+                fs.unlink(oldImageFullPath, function (err) {
+                    if (err) {
+                        console.error(err);
+                    }
+                    console.log('Old image deleted:', oldImagePath);
+                });
+            }
+
+            res.redirect('/');
+        });
+    });
+});
 
 router.post('/newsletter', (req, res) => {
     const email = req.body.mail;

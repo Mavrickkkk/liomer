@@ -24,7 +24,7 @@ function isAdmin(req, res, next) {
 }
 
 router.get('/ajoutAffiche', isAdmin, function (req, res, next) {
-    res.render('ajoutAffiche', {title: 'Liomer - ajouter une affiche'});
+    res.render('ajoutAffiche', {title: 'Liomer - ajouter une affiche', admin: req.session.admin});
 });
 
 router.post('/envoyerAffiche', upload.single('file'), function (req, res, next) {

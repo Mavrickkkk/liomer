@@ -10,7 +10,7 @@ function isValidEmail(email) {
 }
 
 router.get('/contacter', function (req, res, next) {
-    res.render('contacter', {title: 'Liomer - nous contacter'});
+    res.render('contacter', {title: 'Liomer - nous contacter', admin: req.session.admin});
 });
 
 router.post('/contact', (req, res) => {

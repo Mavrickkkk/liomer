@@ -1,36 +1,63 @@
 doctype html
 html
     include partials/header.pug
-    div.center2.marginBottom
+    div.center2
         div.blueTop
         div.blueTop.whiteTop
         div.blueTop.redTop
     div.center2
         h2 La mairie
     div.center.align-items-center
-        img.pic.largeWidth(src="/images/mairie.png", alt='mairie')
+        img.pic.largeWidth(src=`/images/${mairieImage}`, alt='Image de la mairie')
+    if admin == 1
+        div.center
+            p.subText.blueButton#editImageButton modifier l'image
+        form#imageForm.form(action='/envoyerPhoto/2', method='post', enctype='multipart/form-data', style='display: none;')
+            div.center2
+                p changer l'image
+            div.center2
+                p.subText * uniquement png jpg ou jpeg
+            div.center2
+                .custom-file-upload
+                    input#fileInput(type='file', name='file', accept='image/png, image/jpeg, image/jpg', required)
+                    label(for='fileInput') +
+            div.center2
+                button.submitForm(type='submit') Envoyer
+    script.
+        //afficher le formulaire de modification de l'image
+        const editImageButton = document.getElementById('editImageButton');
+        const imageForm = document.getElementById('imageForm');
+
+        editImageButton.addEventListener('click', function () {
+            if (imageForm.style.display === 'none') {
+                imageForm.style.display = 'block';
+            } else {
+                imageForm.style.display = 'none';
+            }
+        });
+
+        // envoyer l'image dans la base de donnée
+        const fileInput = document.querySelector('#fileInput');
+        const label = document.querySelector('.custom-file-upload label');
+
+        fileInput.addEventListener('change', () => {
+            const fileName = fileInput.files[0].name;
+            label.textContent = fileName;
+        });
     div.center
         div.blockInfo.centerV
             div
                 div.center
                     p.green.lilMarginBottom horaires de la mairie
                     br
-                div.lilMarginBottom.center.flex-column
-                    p.noMargin Lundi
-                    p.subText.noMargin 09h00 - 12h00 et 13h30 - 17h30
-                div.lilMarginBottom.center.flex-column
-                    p.noMargin Mardi
-                    p.subText.noMargin 09h00 - 12h00
-                div.lilMarginBottom.center.flex-column
-                    p.noMargin Mercredi
-                    p.subText.noMargin 09h45 - 12h00
-                div.center.flex-column
-                    p.noMargin vendredi
-                    p.subText.noMargin 14h30 - 16h30
+                each horaire in horaires
+                    div.lilMarginBottom.center.flex-column
+                        p.noMargin= horaire.jour
+                        p.subText.noMargin= horaire.heures
     div.center
         div.blockInfoLarge
             p.marginLeft Présentation
-            p.subText.marginLeft Liomer est une commune située dans la Somme, en région Haut-de-France. En 2021 elle comptait 386 habitants pour une surface de 3.89km². Elle est traversée par le Liger
+            p.subText.marginLeft Liomer est une commune de la Somme, située en région Hauts-de-France. En 2021, elle comptait 386 habitants répartis sur une superficie de 3,89 km². Cette charmante localité est traversée par le Liger qui suit son chemin vers Brocourt et Lequesne, les villages voisins.
             p.marginLeft Fait historique notable
             p.subText.marginLeft Le 17 août 1944, les populations de Liomer et Brocourt sont malmenées. Les deux villages sont entourés par des troupes dirigées par des SS, aux premières heures du jour. Les femmes, les personnes âgées et les enfants sont regroupés dans la cour de l'hôtel de ville par l'occupant allemand. Les hommes sont rassemblés sur la place pour être emprisonnés à Amiens. Les villageois qui tentent de fuir sont abattus. L'abbé Michel Lyonneau, parlant allemand, entreprendra des négociations qui permettront la libération des personnes arrêtées. (wikipédia)
             p.subText.marginLeft Une rue a été baptisée en son honneur pour son acte de bravoure.
@@ -62,6 +89,35 @@ html
     div.center
         div.blockInfoLarge
             h3 Élus
+            each elu in elus
+                if (elu.role == 1)
+                    h3=`Maire : ${elu.prenom} ${elu.nom}`
+                if (elu.role == 2)
+                    p=`Premier adjoint : ${elu.prenom} ${elu.nom}`
+                if (elu.role == 3)
+                    p=`Second adjoint : ${elu.prenom} ${elu.nom}`
+                if (elu.role == 4)
+                    p.subText=`Conseiller municipal : ${elu.prenom} ${elu.nom}`
+                if admin==1
+                    a.red.subText(href=`/supprimerElus/${elu.id}`) Supprimer
+            if admin==1
+                    h1 Ajouter un(e) Élu(e)
+                    p.subText * Toutes les données ci-dessous sont requises
+                    form.form(action='/ajouterElu', method='post')
+                        p prénom
+                        input.input(type='text', id='prenom', name='prenom', required)
+                        p nom
+                        input.input(type='text', id='nom', name='nom', required)
+                        p rôle
+                        select#role(name='role', required)
+                            option(value='') -- Sélectionnez un rôle --
+                            option(value='1') Maire
+                            option(value='2') Premier adjoint
+                            option(value='3') Second adjoint
+                            option(value='4') Conseiller municipal
+                        div.center
+                            button.submitForm(type='submit') Envoyer
+
     div.largeMarginLeft
         h3 Photos
     script.

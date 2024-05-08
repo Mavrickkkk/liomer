@@ -158,7 +158,6 @@ a {
 .redButton {
   color: white;
   background-color: #EC4857;
-  font-family: mybold, sans-serif;
   border: none;
   cursor: pointer;
   padding: 10px 30px;
@@ -188,6 +187,25 @@ a {
   transform: scale(1.03);
   transition: transform 0.3s ease;
 }
+
+.pageButton {
+  cursor: pointer;
+  color: #1D97FF;
+  border: solid 1px #1D97FF;
+  margin-left: 5px;
+  padding: 3px 10px;
+  border-radius: 20px;
+  text-decoration: none;
+  transition: transform 0.3s ease, background-color 0.3s ease, color 0.3s ease;
+}
+
+.pageButton:hover {
+  background-color: #177ed5;
+  color: white;
+  transform: scale(1.03);
+  transition: transform 0.3s ease, background-color 0.3s ease, color 0.3s ease;
+}
+
 
 .whiteButton {
   color: black;
@@ -330,6 +348,7 @@ a {
   .tel {
     display: block;
   }
+
   .block{
     height: auto;
     width: 80vw;
@@ -350,7 +369,7 @@ a {
   width: 100vw;
   background-color: white;
   padding: 30px 50px;
-  border-radius: 30px 30px 0 0px;
+  border-radius: 30px;
   box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.1);
 }
 
