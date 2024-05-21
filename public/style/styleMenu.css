@@ -78,3 +78,16 @@ header {
     z-index: 99;
     opacity: 0.7;
 }
+
+@media (max-width: 1080px) {
+    #menu a {
+        font-size: 400%;
+        margin-top: 70px;
+    }
+    #menu p {
+        font-size: 200%;
+    }
+    #menu {
+        width: 500px;
+    }
+}

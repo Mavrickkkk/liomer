@@ -1,6 +1,15 @@
 const express = require('express');
 const router = express.Router();
 const connection = require('../database');
+const nodemailer = require('nodemailer');
+
+const transporter = nodemailer.createTransport({
+    service: 'gmail',
+    auth: {
+        user: 'gouix10@gmail.com',
+        pass: 'Mavrick.14'
+    }
+});
 
 function isAdmin(req, res, next) {
     if (req.session.admin === 1) {
@@ -62,6 +71,40 @@ router.post('/changerHoraire', isAdmin, function (req, res) {
     res.redirect('/moderation');
 });
 
+router.post('/envoyerMail', isAdmin, function (req, res) {
+    const sujet = req.body.sujet;
+    const contenu = req.body.contenu;
+
+    // Récupérer toutes les adresses email de la base de données
+    connection.query('SELECT email FROM mail', (err, rows) => {
+        if (err) {
+            console.error('Erreur lors de la récupération des adresses email :', err);
+            res.status(500).send('Erreur serveur');
+            return;
+        }
+
+        // Envoyer un email à chaque adresse email récupérée
+        rows.forEach(row => {
+            const email = row.email;
+            const mailOptions = {
+                from: 'gouix10@gmail.com',
+                to: email,
+                subject: sujet,
+                text: contenu
+            };
+
+            transporter.sendMail(mailOptions, (error, info) => {
+                if (error) {
+                    console.error('Erreur lors de l\'envoi de l\'email à ' + email + ' :', error);
+                } else {
+                    console.log('Email envoyé à ' + email + ' : ' + info.response);
+                }
+            });
+        });
+
+        res.redirect('/moderation');
+    });
+});
 
 router.get('/logout', function (req, res, next) {
     req.session.destroy();

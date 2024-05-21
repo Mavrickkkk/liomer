@@ -161,7 +161,7 @@ a {
   border: none;
   cursor: pointer;
   padding: 10px 30px;
-  border-radius: 20px;
+  border-radius: 100px;
   text-decoration: none;
   transition: transform 0.3s ease;
 }
@@ -349,6 +349,22 @@ a {
     display: block;
   }
 
+  p {
+    font-size: 30px;
+  }
+
+  .subText {
+    font-size: 25px;
+  }
+
+  h2 {
+    font-size: 60px;
+  }
+
+  h3 {
+    font-size: 45px;
+  }
+
   .block{
     height: auto;
     width: 80vw;
@@ -432,4 +448,23 @@ form {
   cursor: pointer;
   font-size: 100%;
   padding: 0;
+}
+
+.image {
+  max-width: 500px;
+  max-height: 400px;
+  object-fit: cover;
+  margin: 10px;
+  border-radius: 20px;
+  box-shadow: 0px 0px 7px rgba(0, 0, 0, 0.1);
+}
+
+.allWidth {
+  width: 100%;
+}
+
+.center.allWidth {
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
 }

@@ -1,7 +1,21 @@
 const express = require('express');
 const connection = require('../database');
 const router = express.Router();
+const cron = require('node-cron');
+const moment = require('moment');
 
+// Tâche planifiée pour supprimer les messages de plus de 3 mois
+cron.schedule('0 0 * * 0', () => {
+    const threeMonthsAgo = moment().subtract(3, 'months').toDate();
+
+    connection.query('DELETE FROM contact WHERE date_creation < ?', [threeMonthsAgo], (err, result) => {
+        if (err) {
+            console.error('Erreur lors de la suppression des messages de plus de 3 mois :', err);
+        } else {
+            console.log(`Suppression de ${result.affectedRows} messages de plus de 3 mois`);
+        }
+    });
+});
 
 // Fonction pour valider l'adresse e-mail
 function isValidEmail(email) {

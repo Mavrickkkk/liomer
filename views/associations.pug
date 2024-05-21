@@ -13,19 +13,21 @@ html
                 p.subText= association.description
                 p Président(e)
                     span.subText.marginLeft= association.president
-                p Adresse
-                    span.subText.marginLeft= association.adresse
+                if association.adresse
+                    p Adresse
+                        span.subText.marginLeft= association.adresse
                 p Coordonnées
                     span.subText.marginLeft= association.coordonnees
                 if admin == 1
                     form(action=`/associations/delete/${association.id}`, method='post')
                         button.subText.red(type='submit') Supprimer
                 div.marginBottom
+
     if admin == 1
         div.center
             div.formulaire
                 h1 Ajout d'une association
-                p.subText * Toutes les données ci dessous sont requises
+                p.subText * Toutes les données avec une étoile ne sont pas requises
                 form.form(action='/associations', method='post')
                     p nom de l'association
                     input.input(type='text', id='nom', name='nom', required)
@@ -33,8 +35,8 @@ html
                     textarea.input.textArea(id='description', name='description', required)
                     p président
                     input.input(type='text', id='president', name='president', required)
-                    p adresse
-                    input.input(type='text', id='adresse', name='adresse', required)
+                    p * adresse
+                    input.input(type='text', id='adresse', name='adresse')
                     p coordonnée
                         span.subText  (numéro de téléphone, adresse mail ou les deux)
                     input.input(type='text', id='coordonnee', name='coordonnee', required)

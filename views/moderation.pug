@@ -11,9 +11,6 @@ html
                     span.subText.blue= ` ${contact.prenom} `
                     span.subText.blue= `${contact.nom} `
                     span.subText= `( ${contact.mail} )`
-                form(method='POST', action='/supprimerMessage', style='display: inline;')
-                    input(type='hidden', name='id', value=contact.id)
-                    button.subText.blue(type='submit') Lu
                 div.marginBottom
     div.center
         div.formulaire
@@ -23,6 +20,17 @@ html
                 each horaire in horaires
                     p=horaire.jour
                     input.input(type='text', id=horaire.jour, name=horaire.jour, required, value=horaire.heures)
+                div.center
+                    button.submitForm(type='submit') Envoyer
+    div.center
+        div.formulaire
+            h1 Envoyer un mail à la newsletter
+            p.subText * Ce mail sera envoyé à toutes les personnes inscrites
+            form.form(action='/envoyerMail', method='post')
+                p sujet
+                input.input(type='text', id='sujet', name='sujet', required)
+                p contenu
+                textarea.input.textArea(id='contenu', name='contenu', required)
                 div.center
                     button.submitForm(type='submit') Envoyer
     div.center.lilMarginTop

@@ -25,9 +25,12 @@ router.get('/associations', function (req, res) {
 router.post('/associations', (req, res) => {
     const { nom, description, president, adresse, coordonnee } = req.body;
 
+    // Vérifier si la valeur de adresse est une chaîne vide
+    const adresseToInsert = adresse === '' ? null : adresse;
+
     connection.query(
         'INSERT INTO associations (nom, description, president, adresse, coordonnees) VALUES (?, ?, ?, ?, ?)',
-        [nom, description, president, adresse, coordonnee],
+        [nom, description, president, adresseToInsert, coordonnee], // Utiliser adresseToInsert ici
         (err, result) => {
             if (err) {
                 console.error('Erreur lors de l\'envoi du formulaire de contact', err);
@@ -39,6 +42,7 @@ router.post('/associations', (req, res) => {
         }
     );
 });
+
 
 router.post('/associations/delete/:id', isAdmin ,(req, res) => {
     const { id } = req.params;

@@ -84,6 +84,8 @@ html
                         .custom-file-upload
                             input#fileInput(type='file', name='file', accept='image/png, image/jpeg, image/jpg, application/pdf', required)
                             label(for='fileInput') +
+                    div.center.lilMarginTop
+                        input.input(type='date', id='date', name='date_creation', required)
                     div.center
                         button.submitForm(type='submit') Envoyer
     div.center
@@ -97,7 +99,7 @@ html
                 if (elu.role == 3)
                     p=`Second adjoint : ${elu.prenom} ${elu.nom}`
                 if (elu.role == 4)
-                    p.subText=`Conseiller municipal : ${elu.prenom} ${elu.nom}`
+                    p.subText=`Conseiller(e) municipal : ${elu.prenom} ${elu.nom}`
                 if admin==1
                     a.red.subText(href=`/supprimerElus/${elu.id}`) Supprimer
             if admin==1
@@ -120,12 +122,42 @@ html
 
     div.largeMarginLeft
         h3 Photos
+        div.center.allWidth
+            img.image(src="images/mairie_cote.jpg" alt="mairie" title="mairie")
+            img.image(src="images/mairie_face.jpg" alt="mairie" title="mairie")
+            img.image(src="images/mairie_vert.jpg" alt="mairie" title="mairie")
+            img.image(src="images/mairieInt1.jpg" alt="mairie" title="mairie")
+            img.image(src="images/mairieInt2.jpg" alt="mairie" title="mairie")
+            img.image(src="images/poste2.jpg" alt="l'agence postale" title="l'agence postale")
+            img.image(src="images/poste1.jpg" alt="l'agence postale" title="l'agence postale")
+            img.image(src="images/ecole1.jpg" alt="école primaire" title="école primaire")
+            img.image(src="images/ecole2.jpg" alt="école primaire" title="école primaire")
+            img.image(src="images/ecole3.jpg" alt="école primaire" title="école primaire")
+            img.image(src="images/ecole4.jpg" alt="école maternelle" title="école maternelle")
+            img.image(src="images/frip1.jpg")
+            img.image(src="images/frip2.jpg")
+            img.image(src="images/frip3.jpg")
+            img.image(src="images/frip4.jpg")
+            img.image(src="images/frip5.jpg")
+            img.image(src="images/frip6.jpg")
+            img.image(src="images/frip7.jpg")
+            img.image(src="images/frip8.jpg")
+            img.image(src="images/frip9.jpg")
+            img.image(src="images/frip10.jpg")
+            img.image(src="images/frip11.jpg")
+            img.image(src="images/frip12.jpg")
+            img.image(src="images/frip13.jpg")
+            img.image(src="images/frip14.jpg")
+            img.image(src="images/frip15.jpg")
+            img.image(src="images/sdf2.jpg")
+            img.image(src="images/sdf3.jpg")
     script.
-        const fileInput = document.querySelector('#fileInput');
+        const fileInput = document.querySelector('input[type="file"]');
         const label = document.querySelector('.custom-file-upload label');
 
         fileInput.addEventListener('change', () => {
             const fileName = fileInput.files[0].name;
             label.textContent = fileName;
         });
+
     include partials/footer
